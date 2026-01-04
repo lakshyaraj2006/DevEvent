@@ -20,6 +20,15 @@ export const metadata: Metadata = {
   description: "The Hub for Every Dev Event You Musn't Miss",
 };
 
+/**
+ * Defines the application's root HTML layout, injecting global fonts, UI chrome, animated background, and page content.
+ *
+ * Renders the top-level HTML/body structure with configured fonts, a Suspense boundary that includes navigation and a decorative
+ * LightRays background, and places the provided `children` inside the main content area.
+ *
+ * @param children - The page content to render inside the layout's main element
+ * @returns The root HTML element tree for the application layout
+ */
 export default function RootLayout({
   children,
 }: Readonly<{

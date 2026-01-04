@@ -4,6 +4,17 @@ import { v2 as cloudinary } from "cloudinary";
 import { Event } from "@/database";
 import connectDB from "@/lib/mongodb";
 
+/**
+ * Create a new event from multipart form data and upload its image to Cloudinary.
+ *
+ * Validates incoming form data, requires an `image` file, parses `tags` and `agenda`, saves the image externally,
+ * and inserts the resulting event document into the database.
+ *
+ * @returns A NextResponse containing JSON:
+ * - Success (201): `{ message: 'Event created successfully', event }` with the created event document.
+ * - Client error (400): `{ message }` describing the validation issue (e.g., missing image or invalid JSON).
+ * - Server error (500): `{ message: 'Event Creationn Failed', error }` with an error string when an unexpected failure occurs.
+ */
 export async function POST(req: NextRequest) {
     try {
         await connectDB();
@@ -53,6 +64,11 @@ export async function POST(req: NextRequest) {
     }
 }
 
+/**
+ * Handle GET requests to retrieve all events sorted by newest first.
+ *
+ * @returns A NextResponse containing `{ message, events }` with status 200 on success; on failure, a NextResponse containing `{ message, error }` with status 500.
+ */
 export async function GET(req: NextRequest) {
     try {
         await connectDB();
